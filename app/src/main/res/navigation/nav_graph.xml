@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainPageFragment">
+    <fragment
+        android:id="@+id/mainPageFragment"
+        android:name="com.tolgakolek.taskmanager.ui.mainpage.MainPageFragment"
+        android:label="fragment_main_page"
+        tools:layout="@layout/fragment_main_page" >
+        <action
+            android:id="@+id/action_mainPageFragment_to_eventFragment"
+            app:destination="@id/eventFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventFragment"
+        android:name="com.tolgakolek.taskmanager.ui.event.EventFragment"
+        android:label="fragment_event"
+        tools:layout="@layout/fragment_event" >
+        <action
+            android:id="@+id/action_eventFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dayEventFragment"
+        android:name="com.tolgakolek.taskmanager.ui.event.day.DayEventFragment"
+        android:label="fragment_day_event"
+        tools:layout="@layout/fragment_day_event" />
+    <fragment
+        android:id="@+id/weekEvent"
+        android:name="com.tolgakolek.taskmanager.ui.event.week.WeekEventFragment"
+        android:label="fragment_week_event"
+        tools:layout="@layout/fragment_week_event" />
+    <fragment
+        android:id="@+id/yearEvent"
+        android:name="com.tolgakolek.taskmanager.ui.event.year.YearEventFragment"
+        android:label="fragment_year_event"
+        tools:layout="@layout/fragment_year_event" />
+</navigation>

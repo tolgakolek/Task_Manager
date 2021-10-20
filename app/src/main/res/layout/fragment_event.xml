@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:paddingBottom="30dp"
+    tools:context=".ui.event.EventFragment">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnOkey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvHeader"
+        app:strokeColor="@color/ligthBlueBackground"
+        app:strokeWidth="4dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/material_on_primary_disabled">
+
+            <EditText
+                android:id="@+id/etEventName"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/grayBackground"
+                android:hint="Etkinlik Adı"
+                android:lines="1"
+                android:paddingStart="10dp"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvHeader" />
+
+            <EditText
+                android:id="@+id/etDescription"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/grayBackground"
+                android:hint="Açıklama"
+                android:minHeight="50dp"
+                android:paddingStart="10dp"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="@+id/tvEndDate"
+                app:layout_constraintStart_toStartOf="@+id/tvHeaderEndDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvHeaderEndDate" />
+
+            <ImageButton
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="50dp"
+                android:background="@null"
+                android:paddingBottom="20dp"
+                android:src="@drawable/ic_baseline_close"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+            <ImageButton
+                android:id="@+id/btnOkey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="24dp"
+                android:background="@null"
+                android:paddingBottom="20dp"
+                android:src="@drawable/ic_baseline_check"
+                app:layout_constraintEnd_toEndOf="@+id/etDescription"
+                app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+
+            <TextView
+                android:id="@+id/tvHeaderStartDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Başlangıç"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/etEventName"
+                app:layout_constraintTop_toBottomOf="@+id/etEventName" />
+
+            <TextView
+                android:id="@+id/tvStartDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="19.10.2021 Salı 19:30"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeaderStartDate"
+                app:layout_constraintEnd_toEndOf="@+id/etEventName"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/tvHeaderStartDate"
+                app:layout_constraintTop_toTopOf="@+id/tvHeaderStartDate" />
+
+            <TextView
+                android:id="@+id/tvHeaderEndDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Bitiş"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="@+id/tvHeaderStartDate"
+                app:layout_constraintTop_toBottomOf="@+id/tvHeaderStartDate" />
+
+            <TextView
+                android:id="@+id/tvEndDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="19.10.2021 Salı 20:30"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvHeaderEndDate"
+                app:layout_constraintEnd_toEndOf="@+id/etEventName"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/tvHeaderStartDate"
+                app:layout_constraintTop_toTopOf="@+id/tvHeaderEndDate" />
+
+            <TextView
+                android:id="@+id/tvHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#2b62ff"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="Etkinlik"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</ScrollView>

@@ -1,0 +1,30 @@
+<resources>
+    <array name="material_calendar_months_array">
+        <item>Ocak</item>
+        <item>Şubat</item>
+        <item>Mart</item>
+        <item>Nisan</item>
+        <item>Mayıs</item>
+        <item>Haziran</item>
+        <item>Temmuz</item>
+        <item>Ağustos</item>
+        <item>Eylül</item>
+        <item>Ekim</item>
+        <item>Kasım</item>
+        <item>Aralık</item>
+    </array>
+
+    <string name="app_name">Task Manager</string>
+
+    <string name="material_calendar_monday">P</string>
+    <string name="material_calendar_tuesday">S</string>
+    <string name="material_calendar_wednesday">Ç</string>
+    <string name="material_calendar_thursday">P</string>
+    <string name="material_calendar_friday">C</string>
+    <string name="material_calendar_saturday">C</string>
+    <string name="material_calendar_sunday">P</string>
+
+    <string name="material_calendar_today_button">Bugün</string>
+    <string name="material_calendar_positive_button">Tamam</string>
+    <string name="material_calendar_negative_button">Vazgeç</string>
+</resources>

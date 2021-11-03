@@ -13,6 +13,7 @@ class EventViewModel @Inject constructor(private val eventDao: EventDao) : ViewM
 
     fun addEventsDao(events:List<Event>){
         viewModelScope.launch {
+            println("addEventsDao " + events[0].date)
             eventDao.insertAllEvent(events)
         }
     }

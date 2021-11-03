@@ -6,7 +6,6 @@ import androidx.room.TypeConverters
 import com.tolgakolek.taskmanager.data.util.DateConverter
 import java.util.*
 
-
 @Entity(tableName = "event")
 data class Event(
     @PrimaryKey(autoGenerate = true)
@@ -14,5 +13,6 @@ data class Event(
     @TypeConverters(DateConverter::class)
     var date: Date,
     var title: String,
-    var description: String
+    var description: String,
+    var alarmActive: Boolean = false
 )

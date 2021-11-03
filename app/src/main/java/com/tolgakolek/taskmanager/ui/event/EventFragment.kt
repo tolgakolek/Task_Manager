@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.format.DateFormat
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -21,6 +21,7 @@ import com.tolgakolek.taskmanager.data.model.Event
 import com.tolgakolek.taskmanager.databinding.FragmentEventBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -53,8 +54,8 @@ class EventFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         arguments?.getString("date").let {
             val date = simpleDateFormat.parse(it)
             calendarStart.time = date
-            calendarStart.set(Calendar.HOUR,hours)
-            calendarEnd.set(Calendar.MINUTE,minutes)
+            calendarStart.set(Calendar.HOUR_OF_DAY,hours)
+            calendarStart.set(Calendar.MINUTE,minutes)
             calendarEnd.time = calendarStart.time
             eventDate = it + " ${days[calender.get(Calendar.DAY_OF_WEEK)-1]} " + String.format(" %02d:%02d", hours, minutes)
             binding.tvStartDate.text = eventDate
@@ -75,6 +76,7 @@ class EventFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
             if (binding.etEventName.text.isNotEmpty() && binding.etDescription.text.isNotEmpty()) {
                 events.clear()
                 if(calendarStart.before(calendarEnd) || calendarStart.time == calendarEnd.time) {
+
                     while (!calendarStart.after(calendarEnd)) {
                         events.add(
                             Event(
@@ -86,6 +88,7 @@ class EventFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
                         )
                         calendarStart.add(Calendar.DATE, 1)
                     }
+                    println("dışarda " + events[0].date)
                     viewModel.addEventsDao(events)
                     findNavController().navigate(R.id.action_eventFragment_to_mainPageFragment)
                 } else {
@@ -133,9 +136,11 @@ class EventFragment : Fragment(), TimePickerDialog.OnTimeSetListener,
         eventDate += String.format(" %02d:%02d", hour, minute)
         if (startDateClick) {
             binding.tvStartDate.text = eventDate
-            calendarStart.set(Calendar.HOUR, hour)
+            calendarStart.set(Calendar.HOUR_OF_DAY, hour)
+            calendarStart.set(Calendar.MINUTE, minute)
         } else {
             binding.tvEndDate.text = eventDate
+            calendarEnd.set(Calendar.HOUR_OF_DAY, hour)
             calendarEnd.set(Calendar.MINUTE, minute)
         }
     }

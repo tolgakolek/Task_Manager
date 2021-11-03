@@ -19,8 +19,8 @@ class DayEventViewModel @Inject constructor(private val eventDao: EventDao) : Vi
     val viewState = _viewState.asStateFlow()
 
     init {
-        val date = SimpleDateFormat("dd.MM.yyyy").format(Calendar.getInstance().time)
-        getAllEventDao(date)
+        val date = Calendar.getInstance().time
+        getAllEventDao(SimpleDateFormat("dd.MM.yyyy").format(date))
     }
 
     fun getAllEventDao(date: String) {
@@ -34,6 +34,15 @@ class DayEventViewModel @Inject constructor(private val eventDao: EventDao) : Vi
             eventDao.deleteEvent(eventId)
         }
     }
+
+    fun setAlarmStatus(isActive: Boolean, eventId: Int) {
+        viewModelScope.launch {
+            eventDao.updateEventAlarm(isActive,eventId)
+        }
+    }
+
+    fun getEventDateById(eventId: Int) =
+        eventDao.getEventById(eventId)
 
     private fun initialCreateViewState() = DayEventState(
         events = emptyList()

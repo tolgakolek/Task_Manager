@@ -9,12 +9,14 @@ import com.tolgakolek.taskmanager.R
 import com.tolgakolek.taskmanager.data.model.Event
 import com.tolgakolek.taskmanager.databinding.ItemEventBinding
 import java.text.SimpleDateFormat
+import kotlin.collections.ArrayList
 
 class EventAdapter(private val listener: EventItemListener) :
     RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
 
     interface EventItemListener {
         fun onClickDeleteEvent(eventId: Int)
+        fun onChangeSwitchAlarm(isChecked: Boolean, eventId: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EventViewHolder {
@@ -54,7 +56,26 @@ class EventAdapter(private val listener: EventItemListener) :
             event = item
             itemBinding.tvTitle.text = item.title
             itemBinding.tvDescription.text = item.description
-            itemBinding.tvEventDate.text = SimpleDateFormat("dd.MM.yyyy").format(item.date.time)
+            itemBinding.tvEventDate.text = SimpleDateFormat("dd.MM.yyyy HH:mm").format(item.date)
+            alarmControl(item.alarmActive, item)
+            itemBinding.swAlarm.setOnCheckedChangeListener { switchButton, isChecked ->
+                alarmControl(isChecked, item)
+                listener.onChangeSwitchAlarm(isChecked,item.id)
+            }
+        }
+
+        private fun alarmControl(isActive: Boolean, item: Event) {
+            if (isActive) {
+                listener.onChangeSwitchAlarm(isActive, item.id)
+                itemBinding.swAlarm.isChecked = isActive
+                itemBinding.cardView.strokeWidth = 5
+                itemBinding.imgNotificationIcon.setImageResource(R.drawable.ic_baseline_notifications_active_24)
+            } else {
+                listener.onChangeSwitchAlarm(isActive, item.id)
+                itemBinding.swAlarm.isChecked = isActive
+                itemBinding.cardView.strokeWidth = 0
+                itemBinding.imgNotificationIcon.setImageResource(R.drawable.ic_baseline_notifications_off_24)
+            }
         }
 
         override fun onClick(p0: View?) {

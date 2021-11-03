@@ -33,6 +33,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_page), View.OnTouchList
     private val viewModel: MainPageViewModel by viewModels()
     private val eventDays: ArrayList<EventDay> = ArrayList()
     private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
+    private var isUpSlide = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -45,7 +46,6 @@ class MainPageFragment : Fragment(R.layout.fragment_main_page), View.OnTouchList
             }
         }
         binding.viewPager.adapter = vpAdapter
-
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when (position) {
                 0 -> {
@@ -61,7 +61,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_page), View.OnTouchList
         }.attach()
 
         binding.tabLayout.setOnTouchListener(this)
-
+        binding.linearLayout.setOnTouchListener(this)
         binding.floatingActionButton.setOnClickListener {
             val date = simpleDateFormat.format(binding.calendarView.selectedDate.time)
             findNavController().navigate(
@@ -93,14 +93,16 @@ class MainPageFragment : Fragment(R.layout.fragment_main_page), View.OnTouchList
 
     override fun onTouch(p0: View?, motionEvent: MotionEvent?): Boolean {
         if (motionEvent?.actionMasked == MotionEvent.ACTION_UP) {
-            if (binding.tabLayout.y > motionEvent.rawY) {
+            if (binding.tabLayout.y > motionEvent.rawY && isUpSlide) {
                 binding.calendarView.slideUp(600)
                 binding.tabLayout.slideUp(600)
                 binding.viewPager.slideUp(600)
-            } else if (binding.tabLayout.y < motionEvent.rawY) {
+                isUpSlide = false
+            } else if (binding.tabLayout.y < motionEvent.rawY && !isUpSlide) {
                 binding.tabLayout.slideDown(600)
                 binding.viewPager.slideDown(600)
                 binding.calendarView.slideDown(600)
+                isUpSlide = true
             }
         }
         return false
@@ -128,6 +130,7 @@ class MainPageFragment : Fragment(R.layout.fragment_main_page), View.OnTouchList
             override fun onAnimationEnd(p0: Animation?) {
                 visibility = View.VISIBLE
             }
+
             override fun onAnimationRepeat(p0: Animation?) {}
         })
         this.startAnimation(animate)

@@ -45,6 +45,15 @@ class WeekEventViewModel @Inject constructor(private val eventDao: EventDao) : V
         }
     }
 
+    fun setAlarmStatus(isActive: Boolean, eventId: Int) {
+        viewModelScope.launch {
+            eventDao.updateEventAlarm(isActive,eventId)
+        }
+    }
+
+    fun getEventDateById(eventId: Int) =
+        eventDao.getEventById(eventId)
+
     private fun initialCreateViewState() = WeekEventState(
         events = emptyList()
     )
